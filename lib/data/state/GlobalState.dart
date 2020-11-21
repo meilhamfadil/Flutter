@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
-class GlobalState extends ChangeNotifier{
+class GlobalState extends ChangeNotifier {
+  bool isRequesting = false;
 
-  bool _isRequesting = false;
-
-  void setRequesting(bool requesting){
-    _isRequesting = requesting;
+  void setRequesting(bool requesting) {
+    isRequesting = requesting;
     notifyListeners();
   }
-
 }

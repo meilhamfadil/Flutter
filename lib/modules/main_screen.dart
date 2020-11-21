@@ -1,7 +1,7 @@
 import 'package:baseflutter/assets/measures.dart';
 import 'package:baseflutter/assets/string.dart';
 import 'package:baseflutter/core/model/MenuModel.dart';
-import 'package:baseflutter/menu.dart';
+import 'package:baseflutter/menus/main_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -33,25 +33,18 @@ class _MainScreen extends State<MainScreen> {
     });
   }
 
-  BottomNavigationBar _bottomNavigationBar(BuildContext context) =>
-      BottomNavigationBar(
-        items: menu
-            .map((MenuModel menu) => BottomNavigationBarItem(
-                  icon: Icon(menu.icon),
-                  title: Text(menu.label),
-                ))
-            .toList(),
+  BottomNavigationBar _bottomNavigationBar(BuildContext context) => BottomNavigationBar(
+        items: mainNavigation.map((NavigationModel menu) => menu.menu).toList().toList(),
         type: BottomNavigationBarType.fixed,
         currentIndex: selectedIndex,
         showUnselectedLabels: true,
         onTap: _onNavigationTapped,
       );
 
-  Widget _content(BuildContext context) =>
-      Center(child: Center(child: _getWidget()));
+  Widget _content(BuildContext context) => Center(child: Center(child: _getWidget()));
 
   Widget _getWidget() => Opacity(
-    opacity: 0.05,
-    child: Icon(menu[selectedIndex].icon, size: 200),
-  );
+        opacity: 0.05,
+        child: mainNavigation[selectedIndex].menu.icon,
+      );
 }
