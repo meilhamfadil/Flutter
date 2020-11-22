@@ -4,25 +4,38 @@ import 'package:flutter/material.dart';
 
 import 'base_screen.dart';
 
-abstract class BasePageComponent extends StatefulWidget {
-  BasePageComponent({Key key}) : super(key: key);
+abstract class AvailableComponent extends Widget {
+  void setOwner(BaseScreenState owner) {}
+}
 
-  BasePageScreenState owner;
+abstract class BaseComponent extends StatefulWidget implements AvailableComponent {
+  BaseComponent({Key key}) : super(key: key);
 
-  void setOwner(BasePageScreenState owner) {
+  BaseScreenState owner;
+
+  @override
+  void setOwner(BaseScreenState owner) {
     this.owner = owner;
   }
 }
 
-abstract class BasePageComponentState<Page extends BasePageComponent> extends State<Page> {
-  BasePageScreenState getScreenOwner() => (this as Page).owner;
+abstract class BaseStatelessComponent extends StatelessWidget implements AvailableComponent {
+  BaseScreenState owner;
+
+  void setOwner(BaseScreenState owner) {
+    this.owner = owner;
+  }
 }
 
-mixin BaseComponent<Page extends BasePageComponent> on BasePageComponentState<Page> {
+abstract class BaseComponentState<Page extends BaseComponent> extends State<Page> {
+  BaseScreenState getScreenOwner() => (this as Page).owner;
+}
+
+mixin Component<Page extends BaseComponent> on BaseComponentState<Page> {
   @override
   Widget build(BuildContext context) => renderBody();
 
-  void openScreen(BasePageComponent component) {
+  void openScreen(BaseComponent component) {
     getScreenOwner().openComponent(component);
   }
 

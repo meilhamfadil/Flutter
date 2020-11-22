@@ -6,7 +6,7 @@ class Pressable extends StatefulWidget {
   String label = "";
   bool loading = false;
 
-  Pressable({this.onPress, this.label, this.loading});
+  Pressable({this.onPress, this.label, this.loading = false});
 
   @override
   State<StatefulWidget> createState() => _Pressable();

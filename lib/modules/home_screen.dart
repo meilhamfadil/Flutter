@@ -1,6 +1,5 @@
 import 'package:baseflutter/assets/measures.dart';
 import 'package:baseflutter/assets/string.dart';
-import 'package:baseflutter/core/model/MenuModel.dart';
 import 'package:baseflutter/menus/main_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

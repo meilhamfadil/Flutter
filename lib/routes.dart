@@ -1,4 +1,4 @@
-import 'file:///C:/Users/Euclid/AndroidStudioProjects/_Base/flutter/lib/modules/main_screen.dart';
+import 'file:///C:/Users/Euclid/AndroidStudioProjects/_Base/flutter/lib/modules/home_screen.dart';
 import 'file:///C:/Users/Euclid/AndroidStudioProjects/_Base/flutter/lib/modules/register_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

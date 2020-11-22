@@ -4,13 +4,19 @@ import 'package:baseflutter/modules/main/main_component_1.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MainScreen extends BasePageScreen {
+class MainScreenArguments {
+  final String name;
+  final String phone;
+
+  MainScreenArguments(this.name, this.phone);
+}
+
+class MainScreen extends BaseScreen {
   @override
   State<StatefulWidget> createState() => _MainScreen();
 }
 
-class _MainScreen extends BasePageScreenState<MainScreen> with BaseScreen {
+class _MainScreen extends BaseScreenState<MainScreen, MainScreenArguments> with Screen {
   @override
-  BasePageComponent getDefaultComponent() => MainComponent1();
-
+  AvailableComponent getDefaultComponent() => MainComponent1();
 }
