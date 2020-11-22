@@ -3,19 +3,19 @@ import 'package:baseflutter/modules/auth/auth_screen.dart';
 import 'package:baseflutter/modules/main/main_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(BaseScreen());
+void main() => runApp(MainApp());
 
 var appTheme = AppTheme();
 
-class BaseScreen extends StatelessWidget {
+class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: appTheme.theme,
-        initialRoute: "/",
+        initialRoute: AuthScreen.routeName,
         routes: {
-          "/": (BuildContext context) => AuthScreen(),
-          "/home": (BuildContext context) => MainScreen(),
+          AuthScreen.routeName: (BuildContext context) => AuthScreen(),
+          MainScreen.routeName: (BuildContext context) => MainScreen(),
         },
       );
 }

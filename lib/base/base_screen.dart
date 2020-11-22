@@ -2,46 +2,43 @@ import 'package:baseflutter/base/base_component.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+abstract class ScreenContract<Page extends BaseScreen, Args> extends State<Page> {
+  List<Component> _components = List();
+  Component _currentComponent;
+  Args arguments;
+
+  void openComponent(Component component) => setState(() {
+        _components.add(component);
+        _currentComponent = component;
+      });
+
+  void replaceComponent(Component component) => setState(() {
+        _components.removeLast();
+        _components.add(component);
+        _currentComponent = component;
+      });
+
+  void onArgumentReceived(Args args) => setState(() {
+        arguments = args;
+      });
+
+  void openScreen(String target, {dynamic arguments}) => Navigator.of(context).pushNamed(
+        target,
+        arguments: arguments,
+      );
+}
+
 abstract class BaseScreen extends StatefulWidget {
   BaseScreen({Key key}) : super(key: key);
 }
 
-abstract class BaseScreenState<Page extends BaseScreen, Args> extends State<Page> {
-  AvailableComponent _currentComponent;
-  Args arguments;
-  List<AvailableComponent> _components = List();
-
-  void openComponent(AvailableComponent component) {
-    setState(() {
-      component.setOwner(this);
-      _components.add(component);
-      _currentComponent = component;
-    });
-  }
-
-  void replaceComponent(AvailableComponent component) {
-    setState(() {
-      _components.removeLast();
-      _components.add(component);
-      _currentComponent = component;
-    });
-  }
-
-  void onArgumentReceived(Args args) {
-    setState(() {
-      arguments = args;
-    });
-  }
-}
+abstract class BaseScreenState<Page extends BaseScreen, Args> extends ScreenContract<Page, Args> {}
 
 mixin Screen<Page extends BaseScreen, Args> on BaseScreenState<Page, Args> {
   @override
   Widget build(BuildContext context) {
     onArgumentReceived(ModalRoute.of(context).settings.arguments);
-
-    if (_currentComponent == null) {
-      openComponent(getDefaultComponent());
-    }
+    if (_currentComponent == null) openComponent(getDefaultComponent());
 
     return WillPopScope(
       onWillPop: _onBackPress,
@@ -60,5 +57,5 @@ mixin Screen<Page extends BaseScreen, Args> on BaseScreenState<Page, Args> {
     return true;
   }
 
-  AvailableComponent getDefaultComponent();
+  Component getDefaultComponent();
 }

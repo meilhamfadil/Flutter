@@ -1,25 +1,24 @@
-import 'dart:async';
-
 import 'package:baseflutter/base/base_component.dart';
+import 'package:baseflutter/base/base_screen.dart';
 import 'package:baseflutter/components/pressable.dart';
-import 'package:baseflutter/modules/main/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'main_component_2.dart';
+import '../main_screen_argument.dart';
+import '../task/task_component.dart';
 
-class MainComponent1 extends BaseComponent {
+class DashboardComponent extends BaseComponent {
+  DashboardComponent(ScreenContract screen) : super(screen);
+
   @override
-  State<StatefulWidget> createState() => _MainComponent1();
+  State<StatefulWidget> createState() => _DashboardComponent(screen);
 }
 
-class _MainComponent1 extends BaseComponentState<MainComponent1> with Component {
-  bool _loading = false;
-
-  void setLoading(loading) => setState(() => _loading = loading);
+class _DashboardComponent extends BaseComponentState<DashboardComponent> with RenderComponent {
+  _DashboardComponent(ScreenContract screen) : super(screen);
 
   @override
-  Widget renderBody() {
-    MainScreenArguments arguments = widget.owner.arguments;
+  Widget render() {
+    MainScreenArguments arguments = screen.arguments;
 
     return Scaffold(
       body: Center(
@@ -34,9 +33,8 @@ class _MainComponent1 extends BaseComponentState<MainComponent1> with Component 
               Container(height: 24),
               Pressable(
                 label: "Hello",
-                loading: _loading,
                 onPress: () {
-                  widget.owner.openComponent(MainComponent2());
+                  widget.screen.openComponent(TaskComponent(widget.screen));
                 },
               ),
             ],
