@@ -13,5 +13,16 @@ class MainScreen extends BaseScreen {
 
 class _MainScreen extends BaseScreenState<MainScreen, MainScreenArguments> with Screen {
   @override
-  Component getDefaultComponent() => DashboardComponent(this);
+  Component getDefaultComponent() => Dashboard(this);
+}
+
+class Dashboard extends BaseStatelessComponent {
+  Dashboard(ScreenContract screen) : super(screen);
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        body: Center(
+          child: Text("Apps"),
+        ),
+      );
 }

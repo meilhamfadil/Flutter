@@ -12,13 +12,13 @@ class AppTheme {
 }
 
 class AppColor {
-  Color primary = Colors.green;
-  Color accent = Colors.indigo;
-  Color secondary = Colors.greenAccent;
-  Color white = Colors.white;
-  Color disable = Colors.black38;
-  Color textDisable = Colors.white54;
-  Color transparent = Colors.transparent;
-  Color black = Colors.black;
-  Color text = Colors.black45;
+  static Color primary = Colors.cyan;
+  static Color accent = Colors.indigo;
+  static Color secondary = Colors.blueAccent;
+  static Color white = Colors.white;
+  static Color disable = Colors.black38;
+  static Color textDisable = Colors.white54;
+  static Color transparent = Colors.transparent;
+  static Color black = Colors.black;
+  static Color text = Colors.black45;
 }
